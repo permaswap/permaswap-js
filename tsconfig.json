@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "es2020",
+    "allowJs": true,
+    "jsx": "preserve",
+    "declarationMap": true,
+    "outDir": "./esm",
+    "declaration": true,
+    "declarationDir": "./esm",
+    "strict": true,
+    "moduleResolution": "node",
+    "rootDirs": [
+      "src"
+    ],
+    "typeRoots": [],
+    "types": [
+      "node",
+      // 注意：https://stackoverflow.com/a/63484466/10091449
+      "@types/jest"
+    ],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -53,15 +53,15 @@ const permaswap = new Permaswap({
 
 ### permaswap.init(callback)
 
-Establish a websocket connection with Permaswap Router, callback will be executed after the connection is established.
+与 Permaswap Router 建立 websocket 连接，callback 会在连接建立后执行。
 
 ### permaswap.subscribe({ payAmount, paySymbol, receiveSymbol }, subscribeHandler)
 
-Subscribe to `order` via `paySymbol`, `receiveSymbol`, `payAmount`. `order` is continuously pushed to the `subscribeHandler` function.
+通过 `paySymbol`, `receiveSymbol`, `payAmount` 订阅 `order`。`order` 会源源不断推送给 `subscribeHandler` 函数。
 
-subscribeHandler function, which takes two parameters, `error` and `order`.
+subscribeHandler 函数，接受两个参数，`error` 和 `order`
 
-`order` contains field examples
+`order` 包含字段示例
 
 ```js
 {
@@ -88,13 +88,13 @@ subscribeHandler function, which takes two parameters, `error` and `order`.
 }
 ```
 
-Where `rate` and `receiveAmount` can be used by the developer to determine if the order is worthy of being filled.
+其中，`rate` 和 `receiveAmount` 可用于开发者判断该笔订单是否值得成交。
 
-`orderHash` is the unique identifier for the `order`.
+`orderHash` 是该 `order` 唯一标识符。
 
 ### permaswap.trade(tokenIn, tokenOut, bundle, paths, tradeHandler)
 
-`tokenIn`, `tokenOut`, `bundle`, `paths` are all from `order`. The `traderHandler` function accepts one argument as the following example.
+`tokenIn`, `tokenOut`, `bundle`, `paths` 均来自 `order`。`traderHandler` 函数接受一个参数如下示例：
 
 ```js
 {
@@ -105,12 +105,12 @@ Where `rate` and `receiveAmount` can be used by the developer to determine if th
 }
 ```
 
-When `status` is `'success'`, it means the order was successful.
+当 `status` 为 `'success'` 时，代表该笔订单交易成功。
 
 ### permaswap.close()
 
-Close the websocket connection between permaswap and router.
+关闭 permaswap 与 router 的 websocket 连接。
 
-## Other
+## 其他
 
-For more examples see [test.ts](https://github.com/permaswap/permaswap-js/blob/main/src/test.ts)
+更多示例见 [test.ts](https://github.com/permaswap/permaswap-js/blob/main/src/test.ts)

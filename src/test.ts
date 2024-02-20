@@ -7,7 +7,7 @@ const ethWalletHasUSDT = {
   privateKey: '94c97d4cc865d77afaf2d64147f7c067890e1485eb5d8e2c15cc0b7528a08b47'
 }
 
-const provider = new ethers.providers.InfuraProvider('kovan')
+const provider = new ethers.providers.InfuraProvider('goerli')
 const signer = new ethers.Wallet(ethWalletHasUSDT.privateKey, provider)
 const everpay = new Everpay({
   debug: true,
@@ -22,10 +22,17 @@ const permaswap = new Permaswap({
 })
 
 const run = async (): Promise<void> => {
+  const everpayInfo = await everpay.info()
+  const tusdcTokenTag = everpayInfo.tokenList.find(t => t.symbol.toUpperCase() === 'TUSDC')?.tag as string
+  const tarTokenTag = everpayInfo.tokenList.find(t => t.symbol.toUpperCase() === 'TAR')?.tag as string
+
+  console.log('tusdcTokenTag', tusdcTokenTag)
+  console.log('tarTokenTag', tarTokenTag)
+
   await permaswap.subscribe({
-    payAmount: '0.01',
-    paySymbol: 'ETH',
-    receiveSymbol: 'USDT'
+    payTokenAmount: '0.01',
+    payTokenTag: tusdcTokenTag,
+    receiveTokenTag: tarTokenTag
   // eslint-disable-next-line node/handle-callback-err
   }, async (err: any, order: any) => {
     if (order != null) {

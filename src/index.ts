@@ -1,16 +1,16 @@
 import Everpay, { Token } from 'everpay'
 import { initSocket, sendQuery, formatRate, getReceiveAmountFromBundle, sendSubmit, getOrderHash } from './utils/swap'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { getTokenBySymbol, toBN } = require('everpay/cjs/utils/util')
+const { getTokenByTag, toBN } = require('everpay/cjs/utils/util')
 
 interface SubscribeParams {
-  paySymbol: string
-  receiveSymbol: string
-  payAmount: string
+  payTokenTag: string
+  receiveTokenTag: string
+  payTokenAmount: string
 }
 
 interface Config {
-  debug: boolean
+  debug?: boolean
   account: string
   everpay: Everpay
 }
@@ -18,7 +18,7 @@ interface Config {
 export default class Permaswap {
   constructor (config: Config) {
     const { debug, account, everpay } = config
-    this._debug = debug
+    this._debug = Boolean(debug)
     this._account = account
     this.everpay = everpay
   }
@@ -47,15 +47,15 @@ export default class Permaswap {
 
   async subscribe (params: SubscribeParams, subscribeHandler: any): Promise<void> {
     const everpayInfo = await this.everpay.info()
-    const { payAmount, paySymbol, receiveSymbol } = params
-    const payToken = getTokenBySymbol(paySymbol, everpayInfo.tokenList)
-    const receiveToken = getTokenBySymbol(receiveSymbol, everpayInfo.tokenList)
+    const { payTokenAmount, payTokenTag, receiveTokenTag } = params
+    const payToken = getTokenByTag(payTokenTag, everpayInfo.tokenList)
+    const receiveToken = getTokenByTag(receiveTokenTag, everpayInfo.tokenList)
     this.subscribeHandler = (err: any, data: any) => {
       if (err != null) {
         subscribeHandler(err, data)
       } else {
         data.rate = formatRate(toBN(1).dividedBy(data.price).toString(), 8)
-        data.receiveAmount = getReceiveAmountFromBundle(data.bundle, receiveToken)
+        data.receiveTokenAmount = getReceiveAmountFromBundle(data.bundle, receiveToken)
         data.orderHash = getOrderHash(data.bundle)
         subscribeHandler(err, data)
       }
@@ -63,7 +63,7 @@ export default class Permaswap {
     sendQuery(this.socket, {
       tokenIn: payToken as Token,
       tokenOut: receiveToken as Token,
-      tokenInAmount: payAmount as any,
+      tokenInAmount: payTokenAmount as any,
       address: this._account
     })
   }

@@ -1634,6 +1634,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/crypto-js@^4.2.1":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.2.2.tgz#771c4a768d94eb5922cc202a3009558204df0cea"
+  integrity sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
   resolved "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.5.tgz"
@@ -1956,7 +1961,19 @@ array.prototype.flat@^1.2.5:
     es-abstract "^1.19.2"
     es-shim-unscopables "^1.0.0"
 
-arweave@^1.10.13, arweave@^1.10.16:
+arweave@1.11.9:
+  version "1.11.9"
+  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.11.9.tgz#4d1fc17052e4e6d6eeb8fd18063b43eca52f2a56"
+  integrity sha512-i+oQQkQgjASG/+iS/BVq0JDhpW0jLGMtiqPwfHe0x46YCnuA23prN82EW4KigxZAphF9jNzDexQjGLAKbhw4Zw==
+  dependencies:
+    arconnect "^0.4.2"
+    asn1.js "^5.4.1"
+    axios "^0.27.2"
+    base64-js "^1.5.1"
+    bignumber.js "^9.0.2"
+    util "^0.12.4"
+
+arweave@^1.10.13:
   version "1.11.6"
   resolved "https://registry.npmjs.org/arweave/-/arweave-1.11.6.tgz"
   integrity sha512-D6N6e2z7oZoxFhu/qElLwQ2T8DxZ8xIqDB+Y16KHvZbassIrrS9iALwxLdaFYNInuyElg6i7qotBMcShWbFSTw==
@@ -2358,6 +2375,11 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.1.1:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
+  integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
 
 cssom@^0.4.4:
   version "0.4.4"
@@ -2836,15 +2858,17 @@ ethers@^5.4.6:
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
 
-everpay@^0.5.5:
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/everpay/-/everpay-0.5.5.tgz#45fd8e013ebfd20e2f5d16f14e52625ca199b76c"
-  integrity sha512-9InDhHDCqo0dOdf/kHRTPUnNdid60LNcTYwfYG0ND3GHOmPFkDZs8//4kYzXH4xw+wnckJ2dZjLNS4iNjBAwOg==
+everpay@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/everpay/-/everpay-1.2.2.tgz#da66b15b6df2b9cd655dbbf821a7de29351f5603"
+  integrity sha512-Y1NSuAfaTvmyvsZ2iHShcUwHWZiAnxeHzZhwR4/pZvixP4NsvqD3OOcHqO+4Iimlf61Af7SRqbmyixXt3Sw4+Q==
   dependencies:
+    "@types/crypto-js" "^4.2.1"
     "@types/lodash" "^4.14.180"
-    arweave "^1.10.16"
+    arweave "1.11.9"
     axios "^0.21.1"
     bignumber.js "^9.0.1"
+    crypto-js "^4.1.1"
     ethers "^5.4.6"
     keccak "^3.0.2"
     lodash "^4.17.21"

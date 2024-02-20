@@ -1,6 +1,6 @@
 {
   "name": "permaswap",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "files": [
@@ -52,7 +52,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "everpay": "^0.5.5",
+    "everpay": "1.2.2",
     "ws": "^8.9.0"
   },
   "gitHooks": {

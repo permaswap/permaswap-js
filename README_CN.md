@@ -1,5 +1,7 @@
 # permaswap-js
 
+**请升级至 0.1.0 或以上版本**
+
 ## Installation
 
 ### Using yarn
@@ -34,7 +36,7 @@ const wallet = {
   privateKey: '94c97d4cc865d77afaf2d64147f7c067890e1485eb5d8e2c15cc0b7528a08b47'
 }
 
-const provider = new ethers.providers.InfuraProvider('kovan')
+const provider = new ethers.providers.InfuraProvider('goerli')
 const signer = new ethers.Wallet(wallet.privateKey, provider)
 const everpay = new Everpay({
   debug: true,
@@ -55,9 +57,11 @@ const permaswap = new Permaswap({
 
 与 Permaswap Router 建立 websocket 连接，callback 会在连接建立后执行。
 
-### permaswap.subscribe({ payAmount, paySymbol, receiveSymbol }, subscribeHandler)
+### permaswap.subscribe({ payTokenAmount, payTokenTag, receiveTokenTag }, subscribeHandler)
 
-通过 `paySymbol`, `receiveSymbol`, `payAmount` 订阅 `order`。`order` 会源源不断推送给 `subscribeHandler` 函数。
+**payTokenTag** 与 **receiveTokenTag** 代表支出的 token tag 和 收到的 token tag，对应 token `symbol` 的唯一 token `tag` 可通过 `everpay.info()` 获取。
+
+通过 `payTokenTag`, `receiveTokenTag`, `payTokenAmount` 订阅 `order`。`order` 会源源不断推送给 `subscribeHandler` 函数。
 
 subscribeHandler 函数，接受两个参数，`error` 和 `order`
 
@@ -83,12 +87,12 @@ subscribeHandler 函数，接受两个参数，`error` 和 `order`
     //...
   ],
   rate: '3274.6826',
-  receiveAmount: '32.746822',
+  receiveTokenAmount: '32.746822',
   orderHash: '0x6985580ad60114fcdeabda7455cf43bcb3a5db0a4a80db33a1816ab1718f442a'
 }
 ```
 
-其中，`rate` 和 `receiveAmount` 可用于开发者判断该笔订单是否值得成交。
+其中，`rate` 和 `receiveTokenAmount` 可用于开发者判断该笔订单是否值得成交。
 
 `orderHash` 是该 `order` 唯一标识符。
 

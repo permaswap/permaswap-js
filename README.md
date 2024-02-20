@@ -1,5 +1,7 @@
 # permaswap-js
 
+**Please upgrade to version 0.1.0 or later**
+
 ## Installation
 
 ### Using yarn
@@ -34,7 +36,7 @@ const wallet = {
   privateKey: '94c97d4cc865d77afaf2d64147f7c067890e1485eb5d8e2c15cc0b7528a08b47'
 }
 
-const provider = new ethers.providers.InfuraProvider('kovan')
+const provider = new ethers.providers.InfuraProvider('goerli')
 const signer = new ethers.Wallet(wallet.privateKey, provider)
 const everpay = new Everpay({
   debug: true,
@@ -55,9 +57,11 @@ const permaswap = new Permaswap({
 
 Establish a websocket connection with Permaswap Router, callback will be executed after the connection is established.
 
-### permaswap.subscribe({ payAmount, paySymbol, receiveSymbol }, subscribeHandler)
+### permaswap.subscribe({ payTokenAmount, payTokenTag, receiveTokenTag }, subscribeHandler)
 
-Subscribe to `order` via `paySymbol`, `receiveSymbol`, `payAmount`. `order` is continuously pushed to the `subscribeHandler` function.
+**payTokenTag** and **receiveTokenTag** represent the paid token tag and the received token tag, and the unique token `tag` corresponding to the token `symbol` is available via `everpay.info()`.
+
+Subscribe to `order` via `payTokenTag`, `receiveTokenTag`, `payTokenAmount`. The `order` is pushed to the `subscribeHandler` function.
 
 subscribeHandler function, which takes two parameters, `error` and `order`.
 
@@ -83,12 +87,12 @@ subscribeHandler function, which takes two parameters, `error` and `order`.
     //...
   ],
   rate: '3274.6826',
-  receiveAmount: '32.746822',
+  receiveTokenAmount: '32.746822',
   orderHash: '0x6985580ad60114fcdeabda7455cf43bcb3a5db0a4a80db33a1816ab1718f442a'
 }
 ```
 
-Where `rate` and `receiveAmount` can be used by the developer to determine if the order is worthy of being filled.
+Where `rate` and `receiveTokenAmount` can be used by the developer to determine if the order is worthy of being filled.
 
 `orderHash` is the unique identifier for the `order`.
 

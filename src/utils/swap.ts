@@ -21,7 +21,7 @@ export const getSwapTokenList = (tokens: Token[], tokenTags: string[], selectedP
 }
 
 export const getSwapInfo = async (debug?: boolean): Promise<string[]> => {
-  const url = `https://${!debug ? 'swap.everpay.io' : 'router0-dev.permaswap.network'}/info`
+  const url = `https://${!debug ? 'router.permaswap.network' : 'router-dev.permaswap.network'}/info`
   const result = await sendRequest({
     url,
     method: 'GET'
@@ -51,7 +51,7 @@ interface GetSwapOrdersResult {
 
 export const getSwapOrders = async (debug: boolean, params: GetSwapOrdersParams): Promise<GetSwapOrdersResult> => {
   const { account, page } = params
-  const url = `https://${!debug ? 'swap.everpay.io' : 'router0-dev.permaswap.network'}/orders/${account}?page=${page}`
+  const url = `https://${!debug ? 'router.permaswap.network' : 'router-dev.permaswap.network'}/orders/${account}?page=${page}`
   const result = await sendRequest({
     url,
     method: 'GET'
@@ -73,7 +73,7 @@ export interface InitSocketParams {
   handleOpen: any
 }
 export const initSocket = (debug: boolean, params: InitSocketParams): any => {
-  const socket = new WebSocket(`wss://${!debug ? 'swap.everpay.io' : 'router0-dev.permaswap.network'}/wsuser`)
+  const socket = new WebSocket(`wss://${!debug ? 'router.permaswap.network' : 'router-dev.permaswap.network'}/wsuser`)
   socket.addEventListener('message', (message: any) => {
     const data = JSON.parse(message.data)
     if (data.event === 'order') {
